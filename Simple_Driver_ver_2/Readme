@@ -1,0 +1,20 @@
+Add more functionlaity to simple driver
+
+we have a makefile and driver code and a test file to verify the driver
+
+$ make
+$ ls -l *.ko
+$ modinfo cedevdrv.ko
+$ sudo insmod cedevdrv.ko cedrvarg=CoolDriver
+$ ls -l /dev/cedevdrv*
+$ modinfo cedevdrv.ko
+
+$ sudo rmmod cedevdrv.ko
+$ tail -f /var/log/kern.log
+$ dmesg | grep cedevdrv
+''
+
+
+$ g++ cedevtest.cpp -o cedevtest
+$ sudo ./cedevtest
+$ tail -f /var/log/kern.log 

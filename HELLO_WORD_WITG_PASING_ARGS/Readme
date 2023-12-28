@@ -1,0 +1,55 @@
+https://embetronicx.com/tutorials/linux/device-drivers/linux-device-driver-tutorial-part-3-passing-arguments-to-device-driver/
+
+module_param()
+module_param_array()
+module_param_cb()
+
+// three ways of sending params 
+module_param() >> single param , type of arg 
+
+ linux/moduleparam.h.
+
+module_param() macro creates the sub-directory under /sys/module. 
+module_param(value_1, int, S_IWUSR|S_IRUSR);
+This will create a sysfs entry. (/sys/module/hello_world_module/parameters/value_1
+
+You can change the value 
+sudo su
+echo 1 > /sys/module/hello_world_module/parameters/value_1
+
+module_param_array()
+This macro is used to send the array as an argument to the Linux device driver
+module_param_array(name,type,num,perm);
+
+name is the name of your array (and of the parameter),
+type is the type of the array elements,
+num is an integer variable (optional) otherwise NULL,
+perm is the usual permissions value)
+
+module_param_cb()
+This macro is used to register the callback. Whenever the argument (parameter) got changed, this callback function will be called.
+
+
+
+/// insmod 
+sudo insmod hello_world.ko value=14 name="TEST_DRIVER" arr_value=100,102,104,10
+
+ls /sys/module/hello_world/parameters/
+arr_value  cb_value  name  value
+
+[98366.781250] Value = 14  
+[98366.781280] cb_value = 0  
+[98366.781292] Name = TEST_DRIVER 
+[98366.781305] Arr_value[0] = 100
+[98366.781317] Arr_value[1] = 102
+[98366.781328] Arr_value[2] = 104
+[98366.781339] Arr_value[3] = 106
+[98366.781350] Kernel Module Inserted Successfully...
+
+
+//if we chnage the value , we can get notification using call back params way 
+sudo sh -c "echo 13 > /sys/module/hello_world/parameters/cb_value"
+
+98587.558611] Call back function called...
+[98587.558637] New value of cb_value = 13
+
