@@ -1,0 +1,22 @@
+We can create a device file in two ways.
+
+Manually
+Automaticall
+
+provide a convenient way to access system resources without requiring the application programmer to know how the underlying device works
+
+they are in /dev dir
+
+manually >>>> mknod -m <perm> <name> <device type> <maj> <min>
+created and registered with a major number and a minor number.
+
+Dyn: using udev
+
+three steps 
+Include the header file linux/device.h and linux/kdev_t.h
+Create the struct Class
+Create Device with the class which is created by the above step
+
+
+
+

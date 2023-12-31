@@ -1,0 +1,30 @@
+alloc_chrdev_region() -> to use dynamic allocation of major number
+class_create() -> to create device class in sysfs
+device_creat() -> to create device under /dev/
+cdv_init() -> to initialize char device structure
+cdev_add() -> to add my device structure in kernel
+
+
+if you get permisiion error when you write tio dev
+use >> sudo sh -c "echo 1 > /dev/etx_device"
+
+
+Runtime way of cerating cdev>>>
+
+struct cdev *my_cdev = cdev_alloc( );
+my_cdev->ops = &my_fops;
+
+
+
+or using 
+void cdev_init(struct cdev *cdev, struct file_operations *fops);
+int cdev_add(struct cdev *dev, dev_t num, unsigned int count);
+
+The file_operations structure is how a char driver sets up this connection. The structure, (defined in <linux/fs.h>), is a collection of function pointers. Each open file is associated with its own set of functions. The operations are mostly in charge of implementing the system calls and are, therefore, named open, read, and so on.
+
+
+In Linux kernel struct inode structure is used to represent files. Therefore, it is different from the file structure that represents an open file descriptor. There can be numerous file structures representing multiple open descriptors on a single file, but they all point to a single inode structure.
+
+The inode structure contains a great deal of information about the file. As a general rule, cdev structure is useful for writing driver code
+
+ struct cdev is one of the elements of the inode structure. The struct cdev is the kernel’s internal structure that represents char devices.  This field contains a pointer to that structure when the inode refers to a char device file.
