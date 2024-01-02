@@ -1,0 +1,28 @@
+https://embetronicx.com/tutorials/linux/device-drivers/sysfs-in-linux-kernel/
+
+Sysfs is the commonly used method to export system information from the kernel space to the user space for specific devices. The SysFS is tied to the device driver model of the kernel. The procfs is used to export the process-specific information and the debugfs is used to export the debug information by the developer
+
+The heart of the sysfs model is the kernel object. Kobject is the glue that binds the sysfs and the kernel, which is represented by struct kobject and defined in <linux/kobject.h>. A struct kobject represents a kernel object, maybe a device or so, such as the things that show up as a directory in the sysfs filesystem
+
+
+kobject is used to create kobject directory in /sys. 
+
+There are several steps to creating and using sysfs.
+
+Create a directory in /sys
+    struct kobject * kobject_create_and_add ( const char * name, struct kobject * parent);
+
+Create Sysfs file
+      we can create the sysfs file using sysfs attributes. struct kobj_attribute {
+ struct attribute attr;
+ ssize_t (*show)(struct kobject *kobj, struct kobj_attribute *attr, char *buf);
+ ssize_t (*store)(struct kobject *kobj, struct kobj_attribute *attr, const char *buf, size_t count);
+};
+  use this macro   >>>> __ATTR(name, permission, show_ptr, store_ptr); to set attrbutes and call this func
+int sysfs_create_file ( struct kobject *  kobj, const struct attribute * attr);
+
+
+
+
+
+ 

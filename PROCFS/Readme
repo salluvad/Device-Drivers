@@ -1,0 +1,7 @@
+https://embetronicx.com/tutorials/linux/device-drivers/procfs-in-linux/
+
+Many processes store information about themselves on this virtual filesystem. ProcFS also stores other system information.
+
+It can act as a bridge connecting the user space and the kernel space. Userspace programs can use proc files to read the information exported by the kernel. Every entry in the proc file system provides some information from the kernel.
+
+

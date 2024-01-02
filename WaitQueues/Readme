@@ -1,0 +1,13 @@
+https://embetronicx.com/tutorials/linux/device-drivers/waitqueue-in-linux-device-driver-tutorial
+
+1. Static Method
+DECLARE_WAIT_QUEUE_HEAD(wq);
+
+
+2.Dyn
+wait_queue_head_t wq;
+init_waitqueue_head (&wq);
+
+create a thread and put it to sleep and wake up it from diff func
+
+
