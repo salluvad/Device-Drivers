@@ -1,0 +1,18 @@
+The default major number of all the misc drivers is 10. But you can choose your minor numbers between 1 to 255.
+
+cdev struct:
+struct miscdevice {
+  int minor;
+  const char *name;
+  struct file_operations *fops;
+  struct miscdevice *next, *prev;
+};
+
+
+//register
+misc_register
+
+//dereigister
+misc_deregister
+
+

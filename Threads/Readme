@@ -1,0 +1,9 @@
+kthread_create + wake_up_process
+
+or Kthread_run
+
+Kthread_stop
+
+kthread_should_stop / kthread_bind
+
+
